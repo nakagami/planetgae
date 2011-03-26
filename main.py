@@ -25,8 +25,13 @@ import os
 import sys
 import logging
 
+from google.appengine.dist import use_library
+use_library('django', '1.2')
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+
 from appengine_django import InstallAppengineHelperForDjango
-InstallAppengineHelperForDjango()
+InstallAppengineHelperForDjango('1.2')
 
 from appengine_django import have_django_zip
 from appengine_django import django_zip_path
