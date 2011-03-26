@@ -43,7 +43,7 @@ class Entry(BaseModel):
     description = db.TextProperty()
     author = db.StringProperty()
     pub_dttm = db.DateTimeProperty()
-    feed = db.RefereneProperty(Feed, collection_name='entries')
+    feed = db.ReferenceProperty(Feed, collection_name='entries')
     def __unicode__(self):
         return self.title
 
