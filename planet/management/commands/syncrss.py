@@ -20,6 +20,7 @@
 #  THE SOFTWARE.
 import sys, urllib2, datetime
 import feedparser
+from google.appengine.ext import db
 from django.core.management.base import BaseCommand
 from planet.models import Feed, Entry
 
@@ -56,11 +57,11 @@ class Command(BaseCommand):
                     t = datetime.datetime(*t[:7])
                     if t > NOW:
                         continue
-                o = Entry.objects.filter(link=e.link)
-                if o:
-                    o = o[0]                # Find a entry (probably 1 entry)
-                else:
-                    o = Entry(feed_id=f.id) # Add new entry
+                q = db.Query(Entry)
+                q.filter("link=", e.link)
+                o = q.get()
+                if not o:
+                    o = Entry(feed=f) # Add new entry
                     o.link = e.get('link')
                 o.title = e.get('title')
                 o.description = e.get('description', '')
