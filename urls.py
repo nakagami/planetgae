@@ -16,7 +16,8 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
     # Example:
-    # (r'^foo/', include('foo.urls')),
+    (r'^$', 'django.views.generic.simple.redirect_to', {'url' : '/planet/'}),
+    (r'^planet/', include('planet.urls')),
 
     # Uncomment this for admin:
 #     (r'^admin/', include('django.contrib.admin.urls')),
