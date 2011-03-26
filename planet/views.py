@@ -18,22 +18,27 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
+import datetime
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from models import Entry, Feed
-import datetime
 
 def pub_dttm_desc(a, b):
     return cmp(b[0].pub_dttm, a[0].pub_dttm)
 
 def index(request):
-    feed_list = Feed.objects.all()
-    entry_list = Entry.objects.select_related().filter(pub_dttm__gte=datetime.date.today()-datetime.timedelta(14)).order_by('-pub_dttm', '-id')
+#    feed_list = Feed.objects.all()
+#    entry_list = Entry.objects.select_related().filter(pub_dttm__gte=datetime.date.today()-datetime.timedelta(14)).order_by('-pub_dttm', '-id')
+    # FIXME:
+    q_feed = Feed.all()
+    feed_list = q_feed.fetch(q_feed.count())
+    q_entry = Entry.all()
+    entry_list = q_entry.fetch(q_entry.count())
 
     # Create as dict tree 
     dict_tree = {}
     for e in entry_list:
-        dict_tree.setdefault(e.pub_date(), {}).setdefault(e.feed_id, []).append(e)
+        dict_tree.setdefault(e.pub_date(), {}).setdefault(e.feed, []).append(e)
     days = dict_tree.keys()
     days.sort()
     days.reverse()

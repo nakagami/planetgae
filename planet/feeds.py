@@ -28,7 +28,12 @@ class RecentFeed(Feed):
     link = "/planet/"
     description = "Planet Python Japan  RSS feeds."
     def items(self):
-        return Entry.objects.filter(pub_dttm__gte=datetime.date.today()-datetime.timedelta(14)).order_by('-pub_dttm', '-id')
+#        return Entry.objects.filter(pub_dttm__gte=datetime.date.today()-datetime.timedelta(14)).order_by('-pub_dttm', '-id')
+        # FIXME:
+        q = Entry.all()
+        entries =  q.fetch(q.count())
+        return entries
+#        return Entry.objects.filter(pub_dttm__gte=datetime.date.today()-datetime.timedelta(14)).order_by('-pub_dttm', '-id')
     def item_pubdate(self, item):
         return item.get_utc_datetime()
 
