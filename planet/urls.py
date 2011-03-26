@@ -28,7 +28,7 @@ feeds = {
 }
 
 urlpatterns = patterns('',
-    (r'^$', 'planetplanet.planet.views.index'),
+    (r'^$', 'planet.views.index'),
     (r'^(.*\.xml)$', 'django.contrib.syndication.views.feed',
             {'feed_dict': feeds}),
 )
