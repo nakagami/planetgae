@@ -1,5 +1,5 @@
 ##############################################################################
-# Copyright (c) 2010 Hajime Nakagami <nakagami@gmail.com>
+# Copyright (c) 2010,2011 Hajime Nakagami <nakagami@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,31 +18,32 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
-from django.db import models
+from appengine_django.models import BaseModel
+from google.appengine.ext import db
 from django.conf import settings
 import datetime
 from dateutil import zoneinfo, tz
 
-class Feed(models.Model):
-    rss_url = models.CharField(max_length=1024)
-    title = models.CharField(max_length=200, blank=True)
-    link = models.CharField(max_length=1024, blank=True)
-    subtitle = models.CharField(max_length=2048, blank=True)
-    author = models.CharField(max_length=200, blank=True)
-    pub_dttm_offset = models.IntegerField(default=0, blank=True)
+class Feed(BaseModel):
+    rss_url = db.StringProperty()
+    title = db.StringProperty()
+    link = db.StringProperty()
+    subtitle = db.StringProperty()
+    author = db.StringProperty()
+    pub_dttm_offset = db.IntegerProperty()
     def __unicode__(self):
         if self.title:
             return self.title
         else:
             return self.rss_url
 
-class Entry(models.Model):
-    link = models.CharField(max_length=1024)
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    author = models.CharField(max_length=200, blank=True)
-    pub_dttm = models.DateTimeField()
-    feed = models.ForeignKey(Feed)
+class Entry(BaseModel):
+    link = db.StringProperty()
+    title = db.StringProperty()
+    description = db.TextProperty()
+    author = db.StringProperty()
+    pub_dttm = db.DateTimeProperty()
+    feed = db.RefereneProperty(Feed, collection_name='entries')
     def __unicode__(self):
         return self.title
 
