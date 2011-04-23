@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>RSS Admin</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" href="/planet/css/planet.css" type="text/css">
+    </head>
+
+    <body>
+        <h1>Admin RSS feeds</h1>
+        <a href="form/">Add New Entry</a>
+        <ul>
+        {% for feed in feed_list %}
+            {% if feed.title %}
+            <li><a href="form/{{feed.key.id}}">{{feed.title}}</a></li>
+            {% else %}
+            <li><a href="form/{{feed.key.id}}">{{feed.rss_url}}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </body>
+</html>

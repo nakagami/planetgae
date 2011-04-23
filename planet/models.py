@@ -1,5 +1,5 @@
 ##############################################################################
-# Copyright (c) 2010,2011 Hajime Nakagami <nakagami@gmail.com>
+# Copyright (c) 2010-2011 Hajime Nakagami <nakagami@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ class Feed(BaseModel):
     link = db.StringProperty()
     subtitle = db.StringProperty()
     author = db.StringProperty()
-    pub_dttm_offset = db.IntegerProperty()
+    pub_dttm_offset = db.IntegerProperty(default=0)
     def __unicode__(self):
         if self.title:
             return self.title

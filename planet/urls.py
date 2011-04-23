@@ -1,5 +1,5 @@
 ##############################################################################
-# Copyright (c) 2010 Hajime Nakagami <nakagami@gmail.com>
+# Copyright (c) 2010-2011 Hajime Nakagami <nakagami@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,8 @@ urlpatterns = patterns('',
     (r'^$', 'planet.views.index'),
     (r'^(.*\.xml)$', 'django.contrib.syndication.views.feed',
             {'feed_dict': feeds}),
+    (r'^admin/feed/$', 'planet.views.admin_feed_index'),
+    (r'^admin/feed/form/(\d*)$', 'planet.views.admin_feed_form'),
 )
 if settings.DEBUG:
     urlpatterns += patterns('',

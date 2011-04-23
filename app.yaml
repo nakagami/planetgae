@@ -4,8 +4,11 @@ runtime: python
 api_version: 1
 
 handlers:
-- url: /static
-  static_dir: static
+- url: /planet/css
+  static_dir: static/planet/css
+
+- url: /planet/images
+  static_dir: static/planet/images
 
 - url: /.*
   script: main.py
