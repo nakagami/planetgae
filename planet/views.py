@@ -58,6 +58,9 @@ def index(request):
     return render_to_response('planet/index.html',
             {'feed_list':feed_list, 'recent_list':recent_list})
 
+def admin_index(request):
+    return render_to_response('planet/admin_index.html', {})
+
 def admin_feed_index(request):
     feed_list = Feed.objects.all()
     return render_to_response('planet/admin_feed.html', {'feed_list':feed_list})
