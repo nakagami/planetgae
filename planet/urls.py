@@ -35,8 +35,3 @@ urlpatterns = patterns('',
     (r'^admin/feed/$', 'planet.views.admin_feed_index'),
     (r'^admin/feed/form/(\d*)$', 'planet.views.admin_feed_form'),
 )
-if settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^css/(.*\.css)$', 'django.views.static.serve', {'document_root':os.path.join(os.getcwd(), 'static/planet/css')}),
-        (r'^images/(.*)$', 'django.views.static.serve', {'document_root':os.path.join(os.getcwd(), 'static/planet/images')}),
-    )
