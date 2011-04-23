@@ -10,5 +10,9 @@ handlers:
 - url: /planet/images
   static_dir: static/planet/images
 
+- url: /admin/.*
+  script: main.py
+  login: required
+
 - url: /.*
   script: main.py
