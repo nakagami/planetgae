@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     (r'^(.*\.xml)$', 'django.contrib.syndication.views.feed',
             {'feed_dict': feeds}),
     (r'^admin/$', 'planet.views.admin_index'),
+    (r'^admin/syncrss$', 'planet.views.admin_syncrss'),
     (r'^admin/feed/$', 'planet.views.admin_feed_index'),
     (r'^admin/feed/form/(\d*)$', 'planet.views.admin_feed_form'),
 )

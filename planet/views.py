@@ -22,7 +22,7 @@ import datetime
 from google.appengine.ext.db import djangoforms
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
-from models import Entry, Feed
+from models import update_rss, Entry, Feed
 
 class FeedForm(djangoforms.ModelForm):
     class Meta:
@@ -60,6 +60,10 @@ def index(request):
 
 def admin_index(request):
     return render_to_response('planet/admin_index.html', {})
+
+def admin_syncrss(request):
+    update_rss()
+    return HttpResponseRedirect('/')
 
 def admin_feed_index(request):
     feed_list = Feed.objects.all()
