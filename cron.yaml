@@ -1,0 +1,4 @@
+cron:
+- description: Sync RSS
+  url: /planet/admin/syncrss
+  schedule: every 1 hours
