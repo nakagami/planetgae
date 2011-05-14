@@ -49,9 +49,13 @@ def update_rss():
                 t = datetime.datetime(*t[:7])
                 if t > NOW:
                     continue
-            q = db.Query(Entry)
-            q.filter("link=", e.link)
-            o = q.get()
+            for o in Entry.all().fetch(1000):
+                if e.link==o.link:
+                    break
+
+#            q = db.Query(Entry).filter('link=', e.link)
+#            o =  q.get()
+
             if not o:
                 o = Entry(feed=f) # Add new entry
                 o.link = e.get('link')
