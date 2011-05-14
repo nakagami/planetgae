@@ -58,9 +58,9 @@ def index(request):
             {'feed_list':feed_list, 'recent_list':recent_list})
 
 def syncrss(request):
-    logging.debug('syncrss() start')
+    logging.info('syncrss() start')
     update_rss()
-    logging.debug('syncrss() end')
+    logging.info('syncrss() end')
     return HttpResponse('OK')
 
 def admin_index(request):
