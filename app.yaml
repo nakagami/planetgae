@@ -14,5 +14,9 @@ handlers:
   script: main.py
   login: required
 
+- url: /planet/syncrss
+  script: main.py
+  login: admin
+
 - url: /.*
   script: main.py
