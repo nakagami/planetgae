@@ -34,9 +34,6 @@ def pub_dttm_desc(a, b):
     return cmp(b[0].pub_dttm, a[0].pub_dttm)
 
 def index(request):
-#    feed_list = Feed.objects.all()
-#    entry_list = Entry.objects.select_related().filter(pub_dttm__gte=datetime.date.today()-datetime.timedelta(14)).order_by('-pub_dttm', '-id')
-    # FIXME:
     q_feed = Feed.all()
     feed_list = q_feed.fetch(q_feed.count())
     q_entry = Entry.all()
