@@ -19,6 +19,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 import datetime
+import logging
 from google.appengine.ext.db import djangoforms
 from google.appengine.ext import db
 from django.http import HttpResponse, HttpResponseRedirect
@@ -60,8 +61,10 @@ def index(request):
             {'feed_list':feed_list, 'recent_list':recent_list})
 
 def syncrss(request):
+    logging.debug('syncrss() start')
     update_rss()
-    return HttpResponseRedirect('/')
+    logging.debug('syncrss() end')
+    return HttpResponse('OK')
 
 def admin_index(request):
     return render_to_response('planet/admin_index.html', {})
