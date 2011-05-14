@@ -50,7 +50,7 @@ def update_rss():
                 if t > NOW:
                     continue
             q = db.Query(Entry)
-            q.filter("link=", e.link)
+            q.filter("link", e.link)
             o = q.get()
             if not o:
                 o = Entry(feed=f) # Add new entry
