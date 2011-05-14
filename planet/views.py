@@ -20,6 +20,7 @@
 #  THE SOFTWARE.
 import datetime
 from google.appengine.ext.db import djangoforms
+from google.appengine.ext import db
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from models import update_rss, Entry, Feed
@@ -84,3 +85,17 @@ def admin_feed_form(request, feed_id=None):
         form = FeedForm(instance=feed)
     return render_to_response('planet/admin_feed_form.html', 
             {'feed_id':feed_id, 'form': form})
+
+def admin_feed_cleanup(request, feed_id):
+    feed = Feed.get_by_id(int(feed_id))
+    for e in db.Query(Entry).filter("feed", feed):
+        e.delete()
+    return HttpResponseRedirect('../')
+
+def admin_feed_delete(request, feed_id):
+    feed = Feed.get_by_id(int(feed_id))
+    for e in db.Query(Entry).filter("feed", feed):
+        e.delete()
+    feed.delete()
+    return HttpResponseRedirect('../')
+

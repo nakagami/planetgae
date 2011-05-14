@@ -35,4 +35,6 @@ urlpatterns = patterns('',
     (r'^admin/$', 'planet.views.admin_index'),
     (r'^admin/feed/$', 'planet.views.admin_feed_index'),
     (r'^admin/feed/form/(\d*)$', 'planet.views.admin_feed_form'),
+    (r'^admin/feed/cleanup/(\d*)$', 'planet.views.admin_feed_cleanup'),
+    (r'^admin/feed/delete/(\d*)$', 'planet.views.admin_feed_delete'),
 )

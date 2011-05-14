@@ -8,14 +8,21 @@
 
     <body>
         <h1>Admin RSS feeds</h1>
+        <a href="../../syncrss">SyncRSS</a> <br />
         <a href="form/">Add New Entry</a>
         <ul>
         {% for feed in feed_list %}
+            <li>
             {% if feed.title %}
-            <li><a href="form/{{feed.key.id}}">{{feed.title}}</a></li>
+            <a href="form/{{feed.key.id}}">{{feed.title}}</a>
             {% else %}
-            <li><a href="form/{{feed.key.id}}">{{feed.rss_url}}</a></li>
+            <a href="form/{{feed.key.id}}">{{feed.rss_url}}</a>
             {% endif %}
+            &nbsp;<a href="cleanup/{{feed.key.id}}">Cleanup</a>
+            |
+            &nbsp;<a href="delete/{{feed.key.id}}">Delete</a>
+            </li>
+
         {% endfor %}
         </ul>
     </body>
