@@ -10,6 +10,10 @@ handlers:
 - url: /planet/images
   static_dir: static/planet/images
 
+- url: /planet/syncrss
+  script: main.py
+  login: admin
+
 - url: /planet/admin/.*
   script: main.py
   login: required
